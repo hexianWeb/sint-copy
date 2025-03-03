@@ -10,122 +10,166 @@ export default class Environment {
     this.debug = this.experience.debug.ui;
     this.debugActive = this.experience.debug.active;
 
-    // Axes Helper
-    this.axesHelper = new THREE.AxesHelper(5);
-    this.axesHelper.visible = false;
-    this.scene.add(this.axesHelper);
-
     // Setup
-    this.setSunLight();
-    this.setEnvironmentMap();
+    this.setLights();
     this.debuggerInit();
   }
 
-  setSunLight() {
-    this.sunLightColor = '#ffffff';
-    this.sunLightIntensity = 8;
-    this.sunLight = new THREE.DirectionalLight(
-      this.sunLightColor,
-      this.sunLightIntensity
+  setLights() {
+    // 第一个方向光源
+    this.directionalLight1 = new THREE.DirectionalLight();
+    this.directionalLight1.position.set(1, 2, 2);
+    this.directionalLight1.color.setRGB(0.95, 0.95, 0.95);
+    this.directionalLight1.intensity = 3;
+    this.scene.add(this.directionalLight1);
+
+    // 第二个方向光源
+    this.directionalLight2 = new THREE.DirectionalLight();
+    this.directionalLight2.position.set(-1, 3, 1);
+    this.directionalLight2.color.setRGB(0.45, 0.36, 0.22);
+    this.directionalLight2.intensity = 4.1;
+    this.scene.add(this.directionalLight2);
+
+    // 环境光
+    this.ambientLight = new THREE.AmbientLight();
+    this.ambientLight.color.setRGB(
+      0.309_468_922_806_742_8,
+      0,
+      0.964_686_247_893_661_2
     );
-    this.sunLight.castShadow = true;
-    this.sunLight.shadow.camera.far = 60;
-    this.sunLight.shadow.mapSize.set(1024, 1024);
-    this.sunLight.shadow.normalBias = 0.05;
-    this.sunLightPosition = new THREE.Vector3(18, 10, 4.5);
-    this.sunLight.position.copy(this.sunLightPosition);
-    this.scene.add(this.sunLight);
-
-    // 设置 sunLight Target
-    this.sunLight.target = new THREE.Object3D();
-    this.sunLightTarget = new THREE.Vector3(6.7, 2.3, -7);
-    this.sunLight.target.position.copy(this.sunLightTarget);
-    this.scene.add(this.sunLight.target);
-
-    this.helper = new THREE.CameraHelper(this.sunLight.shadow.camera);
-    this.helper.visible = false;
-    this.scene.add(this.helper);
+    this.ambientLight.intensity = 2;
+    this.scene.add(this.ambientLight);
   }
 
-  setEnvironmentMap() {
-    this.environmentMap = {};
-    this.environmentMap.intensity = 1;
-    this.environmentMap.texture = this.resources.items.environmentMapTexture;
-    this.environmentMap.texture.colorSpace = THREE.SRGBColorSpace;
-
-    this.scene.environment = this.environmentMap.texture;
+  updateDirectionalLight1Position() {
+    this.directionalLight1.position.copy(this.light1Position);
   }
 
-  updateSunLightPosition() {
-    this.sunLight.position.copy(this.sunLightPosition);
-    this.sunLight.target.position.copy(this.sunLightTarget);
-    this.helper.update();
+  updateDirectionalLight1Color() {
+    this.directionalLight1.color.copy(this.light1Color);
   }
 
-  updateSunLightColor() {
-    this.sunLight.color.set(this.sunLightColor);
+  updateDirectionalLight1Intensity() {
+    this.directionalLight1.intensity = this.light1Intensity;
   }
 
-  updateSunLightIntensity() {
-    this.sunLight.intensity = this.sunLightIntensity;
+  updateDirectionalLight2Position() {
+    this.directionalLight2.position.copy(this.light2Position);
+  }
+
+  updateDirectionalLight2Color() {
+    this.directionalLight2.color.copy(this.light2Color);
+  }
+
+  updateDirectionalLight2Intensity() {
+    this.directionalLight2.intensity = this.light2Intensity;
+  }
+
+  updateAmbientLightColor() {
+    this.ambientLight.color.copy(this.ambientColor);
+  }
+
+  updateAmbientLightIntensity() {
+    this.ambientLight.intensity = this.ambientIntensity;
   }
 
   debuggerInit() {
     if (this.debugActive) {
-      const environmentFolder = this.debug.addFolder({
-        title: 'Environment',
+      const lightsFolder = this.debug.addFolder({
+        title: 'Lights',
         expanded: false
       });
 
-      environmentFolder.addBinding(this.scene, 'environmentIntensity', {
-        min: 0,
-        max: 2,
-        step: 0.01,
-        label: 'Intensity'
-      });
-
-      const sunLightFolder = this.debug.addFolder({
-        title: 'Sun Light',
+      // 第一个方向光源的调试控制
+      const light1Folder = lightsFolder.addFolder({
+        title: 'Directional Light 1',
         expanded: false
       });
 
-      sunLightFolder
-        .addBinding(this, 'sunLightPosition', {
-          label: 'Light Position'
-        })
-        .on('change', this.updateSunLightPosition.bind(this));
+      this.light1Position = this.directionalLight1.position.clone();
+      this.light1Color = this.directionalLight1.color.clone();
+      this.light1Intensity = this.directionalLight1.intensity;
 
-      sunLightFolder
-        .addBinding(this, 'sunLightTarget', {
-          label: 'Light Target'
+      light1Folder
+        .addBinding(this, 'light1Position', {
+          label: 'Position'
         })
-        .on('change', this.updateSunLightPosition.bind(this));
+        .on('change', this.updateDirectionalLight1Position.bind(this));
 
-      sunLightFolder
-        .addBinding(this, 'sunLightColor', {
-          label: 'Light Color',
-          view: 'color'
+      light1Folder
+        .addBinding(this, 'light1Color', {
+          label: 'Color',
+          view: 'color',
+          color: { type: 'float' }
         })
-        .on('change', this.updateSunLightColor.bind(this));
+        .on('change', this.updateDirectionalLight1Color.bind(this));
 
-      sunLightFolder
-        .addBinding(this, 'sunLightIntensity', {
-          label: 'Light Intensity',
+      light1Folder
+        .addBinding(this, 'light1Intensity', {
+          label: 'Intensity',
           min: 0,
-          max: 20,
+          max: 10,
           step: 0.1
         })
-        .on('change', this.updateSunLightIntensity.bind(this));
+        .on('change', this.updateDirectionalLight1Intensity.bind(this));
 
-      sunLightFolder.addBinding(this.helper, 'visible', {
-        label: 'Helper'
+      // 第二个方向光源的调试控制
+      const light2Folder = lightsFolder.addFolder({
+        title: 'Directional Light 2',
+        expanded: false
       });
 
-      if (this.axesHelper) {
-        this.debug.addBinding(this.axesHelper, 'visible', {
-          label: 'Axes'
-        });
-      }
+      this.light2Position = this.directionalLight2.position.clone();
+      this.light2Color = this.directionalLight2.color.clone();
+      this.light2Intensity = this.directionalLight2.intensity;
+
+      light2Folder
+        .addBinding(this, 'light2Position', {
+          label: 'Position'
+        })
+        .on('change', this.updateDirectionalLight2Position.bind(this));
+
+      light2Folder
+        .addBinding(this, 'light2Color', {
+          label: 'Color',
+          view: 'color',
+          color: { type: 'float' }
+        })
+        .on('change', this.updateDirectionalLight2Color.bind(this));
+
+      light2Folder
+        .addBinding(this, 'light2Intensity', {
+          label: 'Intensity',
+          min: 0,
+          max: 10,
+          step: 0.1
+        })
+        .on('change', this.updateDirectionalLight2Intensity.bind(this));
+
+      // 环境光的调试控制
+      const ambientFolder = lightsFolder.addFolder({
+        title: 'Ambient Light',
+        expanded: false
+      });
+
+      this.ambientColor = this.ambientLight.color.clone();
+      this.ambientIntensity = this.ambientLight.intensity;
+
+      ambientFolder
+        .addBinding(this, 'ambientColor', {
+          label: 'Color',
+          view: 'color'
+        })
+        .on('change', this.updateAmbientLightColor.bind(this));
+
+      ambientFolder
+        .addBinding(this, 'ambientIntensity', {
+          label: 'Intensity',
+          min: 0,
+          max: 10,
+          step: 0.1
+        })
+        .on('change', this.updateAmbientLightIntensity.bind(this));
     }
   }
 }

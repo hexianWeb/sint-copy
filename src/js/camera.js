@@ -14,7 +14,7 @@ export default class Camera {
     this.debug = this.experience.debug;
     this.debugActive = this.experience.debug.active;
 
-    this.position = new THREE.Vector3(0, 0, 9);
+    this.position = new THREE.Vector3(0.065, -0.15, 0.711);
     this.target = new THREE.Vector3(0, 0, 0);
 
     this.setInstance();
@@ -25,7 +25,7 @@ export default class Camera {
   setInstance() {
     if (this.orthographic) {
       const aspect = this.sizes.aspect;
-      this.frustumSize = 15;
+      this.frustumSize = 0.5;
 
       this.instance = new THREE.OrthographicCamera(
         -this.frustumSize * aspect,
@@ -37,7 +37,7 @@ export default class Camera {
       );
     } else {
       this.instance = new THREE.PerspectiveCamera(
-        34,
+        75,
         this.sizes.width / this.sizes.height,
         0.1,
         100

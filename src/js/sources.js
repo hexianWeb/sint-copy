@@ -10,5 +10,10 @@ export default [
       'textures/environmentMap/pz.jpg',
       'textures/environmentMap/nz.jpg'
     ]
+  },
+  {
+    name: 'sintRobot',
+    type: 'gltfModel',
+    path: './sint/robot2.glb'
   }
 ];

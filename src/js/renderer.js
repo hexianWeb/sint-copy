@@ -16,13 +16,14 @@ export default class Renderer {
   setInstance() {
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
-      antialias: true
+      antialias: true,
+      alpha: true // 启用透明背景
     });
-    this.instance.toneMapping = THREE.CineonToneMapping;
-    this.instance.toneMappingExposure = 1.75;
-    this.instance.shadowMap.enabled = true;
-    this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.instance.setClearColor('#211d20');
+    this.instance.toneMapping = THREE.ACESFilmicToneMapping;
+    this.instance.toneMappingExposure = 1;
+    this.instance.outputColorSpace = THREE.SRGBColorSpace;
+    this.instance.shadowMap.enabled = false;
+    this.instance.setClearColor(0x00_00_00, 0); // 设置透明背景
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(this.sizes.pixelRatio);
   }
