@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+import FlyLine from '../components/fly-line.js';
 import ParticleSystem from '../components/geometry-particles.js';
 import Experience from '../experience.js';
 import Environment from './environment.js';
@@ -49,6 +50,22 @@ export default class World {
     // 隐藏原始平面
     this.plane.visible = false;
     clonedPlane.visible = false;
+
+    // 创建飞线
+    const startPoint = new THREE.Vector3(-1, 0, -0.5);
+    const endPoint = new THREE.Vector3(1, 0, -0.5);
+    // 可选控制点，如果不提供会自动生成
+    const controlPoint = new THREE.Vector3(0, -0.8, 2);
+
+    // 创建飞线实例
+    this.flyLine = new FlyLine(startPoint, endPoint, controlPoint, {
+      lineWidth: 0.02,
+      lineColor: '#fff',
+      lineOpacity: 0.5,
+      pointSize: 0.15,
+      pointColor: '#ffffff',
+      pointSpeed: 1.5
+    });
   }
 
   update() {
@@ -57,6 +74,9 @@ export default class World {
     }
     if (this.geometryParticles) {
       this.geometryParticles.update();
+    }
+    if (this.flyLine) {
+      this.flyLine.update();
     }
   }
 }
