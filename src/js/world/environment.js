@@ -7,11 +7,13 @@ export default class Environment {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
+    this.renderer = this.experience.renderer.instance;
     this.debug = this.experience.debug.ui;
     this.debugActive = this.experience.debug.active;
 
     // Setup
     this.setLights();
+    this.setEnvironmentMap();
     this.debuggerInit();
   }
 
@@ -19,7 +21,7 @@ export default class Environment {
     // 第一个方向光源
     this.directionalLight1 = new THREE.DirectionalLight();
     this.directionalLight1.position.set(1, 2, 2);
-    this.directionalLight1.color.setRGB(0.95, 0.95, 0.95);
+    this.directionalLight1.color.setRGB(0.13, 0.09, 0.15);
     this.directionalLight1.intensity = 3;
     this.scene.add(this.directionalLight1);
 
@@ -39,6 +41,15 @@ export default class Environment {
     );
     this.ambientLight.intensity = 2;
     this.scene.add(this.ambientLight);
+  }
+
+  setEnvironmentMap() {
+    const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+    const environmentMap = pmremGenerator.fromEquirectangular(
+      this.resources.items.environmentMap
+    ).texture;
+
+    this.scene.environment = environmentMap;
   }
 
   updateDirectionalLight1Position() {

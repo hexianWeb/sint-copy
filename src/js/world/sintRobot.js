@@ -31,15 +31,30 @@ export default class SintRobot {
       // 设置maskMesh 为低反射的standMaterial
       maskMesh.material = new THREE.MeshStandardMaterial({
         color: 0xFF_FF_FF,
-        roughness: 0.1,
-        metalness: 0.8,
-        transparent: true
+        roughness: 0.26,
+        metalness: 0.5
       });
     }
     // 调整模型大小 & 位置
     this.model.scale.set(0.02, 0.02, 0.02);
     this.model.position.set(0, -2.81, 0);
     this.scene.add(this.model);
+
+    // 计算包围盒
+    const boundingBox = new THREE.Box3().setFromObject(this.model);
+    const size = new THREE.Vector3();
+    boundingBox.getSize(size);
+
+    // 输出包围盒大小
+    console.log('模型包围盒大小:', {
+      width: size.x,
+      height: size.y,
+      depth: size.z
+    });
+
+    // 添加包围盒辅助器
+    const boxHelper = new THREE.BoxHelper(this.model, 0xFF_00_00);
+    this.scene.add(boxHelper);
 
     // 设置动画
     this.animation = {};
