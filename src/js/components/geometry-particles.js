@@ -19,9 +19,9 @@ export default class GeometryParticles {
 
     // 初始化参数
     this.parameters = {
-      count: 150,
+      count: 230,
       color: '#ffffff',
-      size: 5, // 降低默认大小
+      size: 3.8, // 降低默认大小
       speed: 0.27,
       opacity: 1,
       sizeAttenuation: false // 添加控制是否根据距离衰减大小的参数

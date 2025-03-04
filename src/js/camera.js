@@ -14,7 +14,7 @@ export default class Camera {
     this.debug = this.experience.debug;
     this.debugActive = this.experience.debug.active;
 
-    this.position = new THREE.Vector3(0.065, -0.15, 0.711);
+    this.position = new THREE.Vector3(0.085, -0.15, 0.711);
     this.target = new THREE.Vector3(0, 0, 0);
 
     this.setInstance();
@@ -28,8 +28,8 @@ export default class Camera {
       this.frustumSize = 0.5;
 
       this.instance = new THREE.OrthographicCamera(
-        -this.frustumSize * aspect,
-        this.frustumSize * aspect,
+        -this.frustumSize * aspect * 0.95,
+        this.frustumSize * aspect * 0.95,
         this.frustumSize,
         -this.frustumSize,
         -1,
