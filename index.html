@@ -33,51 +33,9 @@
     <link rel="icon" sizes="192x192" href="/favicon/favicon-192.webp" />
     <link rel="icon" sizes="512x512" href="/favicon/favicon-512.webp" />
 
-    <!-- GOOGLE -->
-    <meta name="rating" content="General" />
-    <meta name="robots" content="index,follow" />
-    <link
-      rel="sitemap"
-      type="application/xml"
-      title="Sitemap"
-      href="/sitemap.xml"
-    />
-    <meta
-      name="google-site-verification"
-      content="43hCqye5FYTS4SnBMPKNFP-wBhfLHwRBykWJF1WJawo"
-    />
-
-    <!-- FACEBOOK -->
-    <meta property="og:url" content="https://webpack-three-js.d1a.app" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Webpack ThreeJS — Template" />
-    <meta
-      property="og:description"
-      content="Boilerplate template designed to quickly bootstrapping a 3D Web App, SPA, website or landing page with Three.JS, GLSL, Vite, TailwindCSS, ESLint, Husky and much more in just 30 seconds."
-    />
-    <meta property="og:image" content="/og.jpg" />
-
-    <!-- TWITTER -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="webpack-three-js.d1a.app" />
-    <meta property="twitter:url" content="https://webpack-three-js.d1a.app" />
-    <meta name="twitter:title" content="Webpack ThreeJS — Template" />
-    <meta
-      name="twitter:description"
-      content="Boilerplate template designed to quickly bootstrapping a 3D Web App, SPA, website or landing page with Three.JS, GLSL, Vite, TailwindCSS, ESLint, Husky and much more in just 30 seconds."
-    />
-    <meta name="twitter:image" content="/og.jpg" />
-
-    <!-- iOS -->
-    <link rel="apple-touch-icon" href="/favicon/favicon-512.webp" />
-    <link rel="mask-icon" href="/favicon/favicon-512.webp" color="black" />
-    <meta name="apple-mobile-web-app-title" content="Vite ThreeJS — Template" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
-    <!-- ANDROID -->
-    <meta name="theme-color" content="#000" />
-    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&display=swap" rel="stylesheet">
 
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
@@ -86,22 +44,68 @@
       Enable JavaScript to enjoy all the features of this app.
     </noscript>
     <main class="flex h-full bg-[radial-gradient(circle_at_50%_50%,rgb(27,27,47),rgb(15,15,31)_50%,rgb(0,0,0)_100%)] text-color">
-      <header
-        class="absolute top-0 z-[1] w-full cursor-default bg-accent-primary sm:w-auto"
-      >
-        <div class="relative flex justify-center">
-          <h1
-            class="z-[1] select-none p-4 text-xl font-semibold sm:text-2xl md:text-3xl"
-          >
-            Vite ThreeJS — Template
-          </h1>
-          <div
-            class="arrow-right top absolute -right-[43px] -top-[35px] hidden h-0 w-0 rotate-90 border-b-[60px] border-t-[70px] border-b-transparent border-l-accent-primary border-t-transparent sm:-right-[40px] sm:block sm:border-l-[70px] md:-right-[43px] md:border-l-[76px]"
-          ></div>
-        </div>
-      </header>
+      <!-- 保留原有canvas作为背景 -->
       <canvas id="canvas" class="z-[0] h-full w-full"></canvas>
 
+      <!-- 添加内容层 -->
+      <div class="absolute inset-0 z-1 flex flex-col">
+        <!-- 导航栏 -->
+        <nav class="flex items-center justify-between px-12 py-6">
+          <div class="flex items-center">
+            <!-- 左侧logo -->
+            <a href="#" class="mr-12">
+              <svg class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path>
+              </svg>
+            </a>
+            <!-- 导航链接 -->
+            <div class="flex space-x-8 text-white">
+              <a href="#" class="font-medium uppercase tracking-wider">Legend</a>
+              <a href="#" class="font-medium uppercase tracking-wider">How it works</a>
+              <a href="#" class="font-medium uppercase tracking-wider">AI Future</a>
+              <a href="#" class="font-medium uppercase tracking-wider">Roadmap</a>
+              <a href="#" class="font-medium uppercase tracking-wider">Start Now</a>
+            </div>
+          </div>
+          <!-- 右侧链接 -->
+          <div class="flex space-x-4 text-white">
+            <a href="#" class="font-medium uppercase">TG</a>
+            <a href="#" class="font-medium uppercase">X</a>
+            <a href="#" class="font-medium uppercase">DS</a>
+            <a href="#" class="font-medium uppercase">LI</a>
+          </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <div class="flex flex-1 flex-col items-center justify-center px-12">
+          <!-- SINT大标题 -->
+          <!-- <h1 class="text-[15rem] font-light tracking-wider text-purple-200">
+            <span class="mr-20">S</span><span class="mr-20">I</span><span class="mr-20">N</span><span>T</span>
+          </h1> -->
+          <div class="w-4/5">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1510 228" width="1510" height="228" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;"><defs><clipPath id="__lottie_element_2"><rect width="1510" height="228" x="0" y="0"></rect></clipPath><clipPath id="__lottie_element_4"><path d="M0,0 L1510,0 L1510,228 L0,228z"></path></clipPath><path d="" fill-opacity="1"></path><g id="__lottie_element_7"><g transform="matrix(1,0,0,1,755,114)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,0,0)" stroke-opacity="1" stroke-width="28" d=" M638,-108 C638,-108 638,114.31199645996094 638,114.31199645996094"></path></g></g></g><linearGradient id="__lottie_element_13" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-1502.5250244140625" y1="-109.5" x2="131.79299926757812" y2="-245.11500549316406"><stop offset="0%" stop-color="rgb(199,172,255)"></stop><stop offset="44%" stop-color="rgb(227,213,255)"></stop><stop offset="87%" stop-color="rgb(255,255,255)"></stop></linearGradient><mask id="__lottie_element_7_1" mask-type="alpha"><use xlink:href="#__lottie_element_7"></use></mask><g id="__lottie_element_14"><g transform="matrix(1,0,0,1,755,114)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,0,0)" stroke-opacity="1" stroke-width="28" d=" M516.5,-105 C516.5,-105 757,-105 757,-105"></path></g></g></g><linearGradient id="__lottie_element_20" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-1385.5250244140625" y1="-325.4530029296875" x2="131.94200134277344" y2="-451.3710021972656"><stop offset="0%" stop-color="rgb(199,172,255)"></stop><stop offset="44%" stop-color="rgb(227,213,255)"></stop><stop offset="87%" stop-color="rgb(255,255,255)"></stop></linearGradient><mask id="__lottie_element_14_1" mask-type="alpha"><use xlink:href="#__lottie_element_14"></use></mask><g id="__lottie_element_21"><g transform="matrix(1,0,0,1,755,114)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,0,0)" stroke-opacity="1" stroke-width="28" d="M0 0"></path></g><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,0,0)" stroke-opacity="1" stroke-width="28" d=" M48,114.25 C48,114.25 48,-9 48,-9 C48,-9 56,-105 156,-105 C256,-105 260,-7 260,-7 C260,-7 260,114.68800354003906 260,114.68800354003906"></path></g></g></g><linearGradient id="__lottie_element_27" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-911.39599609375" y1="-74" x2="606.0709838867188" y2="-199.91900634765625"><stop offset="0%" stop-color="rgb(199,172,255)"></stop><stop offset="44%" stop-color="rgb(227,213,255)"></stop><stop offset="87%" stop-color="rgb(255,255,255)"></stop></linearGradient><mask id="__lottie_element_21_1" mask-type="alpha"><use xlink:href="#__lottie_element_21"></use></mask><g id="__lottie_element_28"><g transform="matrix(1,0,0,1,755,114)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,0,0)" stroke-opacity="1" stroke-width="24" d=" M-242,-114.68800354003906 C-242,-114.68800354003906 -242,114.375 -242,114.375"></path></g></g></g><linearGradient id="__lottie_element_34" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-516.9949951171875" y1="-45" x2="1000.4719848632812" y2="-170.91900634765625"><stop offset="0%" stop-color="rgb(199,172,255)"></stop><stop offset="44%" stop-color="rgb(227,213,255)"></stop><stop offset="87%" stop-color="rgb(255,255,255)"></stop></linearGradient><mask id="__lottie_element_28_1" mask-type="alpha"><use xlink:href="#__lottie_element_28"></use></mask><g id="__lottie_element_35"><g transform="matrix(1,0,0,1,755,114)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(255,0,0)" stroke-opacity="1" stroke-width="24" d=" M-511,-105 C-511,-105 -686,-105 -686,-105 C-686,-105 -744,-109 -744,-52 C-744,5 -686,2 -686,2 C-686,2 -582,2 -582,2 C-582,2 -535,4 -535,51 C-535,98 -582,104 -582,104 C-582,104 -758,104 -758,104"></path></g></g></g><linearGradient id="__lottie_element_41" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-123.47699737548828" y1="-13" x2="1393.989990234375" y2="-138.91900634765625"><stop offset="0%" stop-color="rgb(199,172,255)"></stop><stop offset="44%" stop-color="rgb(227,213,255)"></stop><stop offset="87%" stop-color="rgb(255,255,255)"></stop></linearGradient><mask id="__lottie_element_35_1" mask-type="alpha"><use xlink:href="#__lottie_element_35"></use></mask></defs><g clip-path="url(#__lottie_element_2)"><g clip-path="url(#__lottie_element_4)" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: block;"><g mask="url(#__lottie_element_35_1)" style="display: block;"><g transform="matrix(1,0,0,1,0,0)" opacity="1"><g opacity="1" transform="matrix(1,0,0,1,115.97699737548828,114)"><path fill="url(#__lottie_element_41)" fill-opacity="1" d=" M-52.83000183105469,-114 C-52.83000183105469,-114 115.47699737548828,-114 115.47699737548828,-114 C115.47699737548828,-114 115.47699737548828,-94.90499877929688 115.47699737548828,-94.90499877929688 C115.47699737548828,-94.90499877929688 -52.83000183105469,-94.90499877929688 -52.83000183105469,-94.90499877929688 C-64.76300048828125,-94.90499877929688 -74.96399688720703,-90.7249984741211 -83.43199920654297,-82.36499786376953 C-91.9000015258789,-74.00499725341797 -96.13400268554688,-63.935001373291016 -96.13400268554688,-52.154998779296875 C-96.13400268554688,-40.375 -91.9000015258789,-30.30500030517578 -83.43199920654297,-21.94499969482422 C-74.96399688720703,-13.774999618530273 -64.76300048828125,-9.6899995803833 -52.83000183105469,-9.6899995803833 C-52.83000183105469,-9.6899995803833 52.83100128173828,-9.6899995803833 52.83100128173828,-9.6899995803833 C70.15299987792969,-9.6899995803833 84.8759994506836,-3.609999895095825 97.0009994506836,8.550000190734863 C109.31900024414062,20.520000457763672 115.47699737548828,35.05500030517578 115.47699737548828,52.154998779296875 C115.47699737548828,69.25499725341797 109.31900024414062,83.88500213623047 97.0009994506836,96.04499816894531 C84.8759994506836,108.01499938964844 70.15299987792969,114 52.83100128173828,114 C52.83100128173828,114 -31.322999954223633,114 -31.322999954223633,114 C-31.322999954223633,114 -115.47699737548828,114 -115.47699737548828,114 C-115.47699737548828,114 -115.47699737548828,94.90499877929688 -115.47699737548828,94.90499877929688 C-115.47699737548828,94.90499877929688 -31.322999954223633,94.90499877929688 -31.322999954223633,94.90499877929688 C-31.322999954223633,94.90499877929688 52.83100128173828,94.90499877929688 52.83100128173828,94.90499877929688 C64.76399993896484,94.90499877929688 74.96299743652344,90.7249984741211 83.43199920654297,82.36499786376953 C91.9000015258789,74.00499725341797 96.13400268554688,63.935001373291016 96.13400268554688,52.154998779296875 C96.13400268554688,40.375 91.9000015258789,30.399999618530273 83.43199920654297,22.229999542236328 C74.96299743652344,13.869999885559082 64.76399993896484,9.6899995803833 52.83100128173828,9.6899995803833 C52.83100128173828,9.6899995803833 -52.83000183105469,9.6899995803833 -52.83000183105469,9.6899995803833 C-70.1520004272461,9.6899995803833 -84.97100067138672,3.7049999237060547 -97.28900146484375,-8.265000343322754 C-109.41400146484375,-20.424999237060547 -115.47699737548828,-35.05500030517578 -115.47699737548828,-52.154998779296875 C-115.47699737548828,-69.25499725341797 -109.41400146484375,-83.79000091552734 -97.28900146484375,-95.76000213623047 C-84.97100067138672,-107.91999816894531 -70.1520004272461,-114 -52.83000183105469,-114z"></path></g></g></g><g mask="url(#__lottie_element_28_1)" style="display: block;"><g transform="matrix(1,0,0,1,0,0)" opacity="1"><g opacity="1" transform="matrix(1,0,0,1,512.4949951171875,114)"><path fill="url(#__lottie_element_34)" fill-opacity="1" d=" M-9.67199993133545,114 C-9.67199993133545,114 -9.67199993133545,-114 -9.67199993133545,-114 C-9.67199993133545,-114 9.67199993133545,-114 9.67199993133545,-114 C9.67199993133545,-114 9.67199993133545,114 9.67199993133545,114 C9.67199993133545,114 -9.67199993133545,114 -9.67199993133545,114z"></path></g></g></g><g mask="url(#__lottie_element_21_1)" style="display: block;"><g transform="matrix(1,0,0,1,0,0)" opacity="1"><g opacity="1" transform="matrix(1,0,0,1,908.89599609375,114)"><path fill="url(#__lottie_element_27)" fill-opacity="1" d=" M-81.697998046875,-80.65499877929688 C-59.18000030517578,-102.88500213623047 -31.94700050354004,-114 0.0010000000474974513,-114 C31.950000762939453,-114 59.18299865722656,-102.88500213623047 81.70099639892578,-80.65499877929688 C104.2239990234375,-58.42499923706055 115.4739990234375,-31.540000915527344 115.4739990234375,0 C115.4739990234375,0 115.4739990234375,114 115.4739990234375,114 C115.4739990234375,114 96.13500213623047,114 96.13500213623047,114 C96.13500213623047,114 96.13500213623047,0 96.13500213623047,0 C96.13500213623047,-17.100000381469727 91.80500030517578,-32.96500015258789 83.14600372314453,-47.595001220703125 C74.677001953125,-62.224998474121094 63.03300094604492,-73.72000122070312 48.2140007019043,-82.08000183105469 C33.39400100708008,-90.62999725341797 17.322999954223633,-94.90499877929688 0.0010000000474974513,-94.90499877929688 C-17.31999969482422,-94.90499877929688 -33.39099884033203,-90.62999725341797 -48.209999084472656,-82.08000183105469 C-63.029998779296875,-73.72000122070312 -74.7699966430664,-62.224998474121094 -83.43000030517578,-47.595001220703125 C-91.89900207519531,-32.96500015258789 -96.13300323486328,-17.100000381469727 -96.13300323486328,0 C-96.13300323486328,0 -96.13300323486328,114 -96.13300323486328,114 C-96.13300323486328,114 -115.4739990234375,114 -115.4739990234375,114 C-115.4739990234375,114 -115.4739990234375,0 -115.4739990234375,0 C-115.4739990234375,-31.540000915527344 -104.21600341796875,-58.42499923706055 -81.697998046875,-80.65499877929688z"></path></g></g></g><g mask="url(#__lottie_element_14_1)" style="display: block;"><g transform="matrix(1,0,0,1,0,0)" opacity="1"><g opacity="1" transform="matrix(1,0,0,1,1394.0250244140625,9.54699993133545)"><path fill="url(#__lottie_element_20)" fill-opacity="1" d=" M-9.8149995803833,9.54800033569336 C-9.8149995803833,9.54800033569336 -115.4749984741211,9.54800033569336 -115.4749984741211,9.54800033569336 C-115.4749984741211,9.54800033569336 -115.4749984741211,-9.54800033569336 -115.4749984741211,-9.54800033569336 C-115.4749984741211,-9.54800033569336 115.4749984741211,-9.54800033569336 115.4749984741211,-9.54800033569336 C115.4749984741211,-9.54800033569336 115.4749984741211,9.54800033569336 115.4749984741211,9.54800033569336 C115.4749984741211,9.54800033569336 9.8149995803833,9.54800033569336 9.8149995803833,9.54800033569336 C9.8149995803833,9.54800033569336 -9.8149995803833,9.54800033569336 -9.8149995803833,9.54800033569336z"></path></g></g></g><g mask="url(#__lottie_element_7_1)" style="display: block;"><g transform="matrix(1,0,0,1,0,0)" opacity="1"><g opacity="1" transform="matrix(1,0,0,1,1394.0250244140625,122.5)"><path fill="url(#__lottie_element_13)" fill-opacity="1" d=" M-9.8149995803833,-105.5 C-9.8149995803833,-105.5 -9.8149995803833,105.5 -9.8149995803833,105.5 C-9.8149995803833,105.5 9.8149995803833,105.5 9.8149995803833,105.5 C9.8149995803833,105.5 9.8149995803833,-105.5 9.8149995803833,-105.5 C9.8149995803833,-105.5 -9.8149995803833,-105.5 -9.8149995803833,-105.5z"></path></g></g></g></g></g></svg>
+          </div>
+          <!-- 副标题 -->
+          <p class="mt-8 text-center text-3xl font-light uppercase tracking-widest text-white">
+            Train your synthetic intelligence, own the future
+          </p>
+
+          <!-- 开始按钮 -->
+          <a href="#" class="mt-20 border border-purple-400 px-12 py-3 text-lg uppercase tracking-widest text-white transition-all hover:bg-purple-900/30">
+            Start Now
+          </a>
+        </div>
+
+        <!-- 底部滚动提示 -->
+        <div class="flex justify-center pb-6">
+          <p class="flex items-center text-lg uppercase tracking-widest text-white">
+            Scroll to explore
+            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </p>
+        </div>
+      </div>
     </main>
 
     <script type="module" src="src/js/index.js"></script>

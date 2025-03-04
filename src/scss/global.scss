@@ -1,40 +1,41 @@
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto-Thin'),
-    url('../assets/fonts/Roboto-Thin.woff2') format('woff2'),
-    url('../assets/fonts/Roboto-Thin.woff') format('woff');
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto-Regular'),
-    url('../assets/fonts/Roboto-Regular.woff2') format('woff2'),
-    url('../assets/fonts/Roboto-Regular.woff') format('woff');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto-Medium'),
-    url('../assets/fonts/Roboto-Medium.woff2') format('woff2'),
-    url('../assets/fonts/Roboto-Medium.woff') format('woff');
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto-Bold'),
-    url('../assets/fonts/Roboto-Bold.woff2') format('woff2'),
-    url('../assets/fonts/Roboto-Bold.woff') format('woff');
-  font-weight: 900;
-  font-display: swap;
-}
+// 移除原有的 @font-face 声明，因为我们现在使用 Google Fonts
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Big Shoulders Stencil", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
+  font-style: normal;
+}
+
+// 添加字重工具类
+.font-thin {
+  font-weight: 100;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-black {
+  font-weight: 900;
 }
