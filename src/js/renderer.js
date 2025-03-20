@@ -20,7 +20,7 @@ export default class Renderer {
       alpha: true // 启用透明背景
     });
     this.instance.toneMapping = THREE.ACESFilmicToneMapping;
-    this.instance.toneMappingExposure = 1;
+    this.instance.toneMappingExposure = 1.5;
     this.instance.outputColorSpace = THREE.SRGBColorSpace;
     this.instance.shadowMap.enabled = false;
     this.instance.setClearColor(0x00_00_00, 0); // 设置透明背景
