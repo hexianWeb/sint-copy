@@ -16,6 +16,7 @@ varying float vOpacity;
 void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
+  // 更新粒子位置，基于时间和噪声值
   modelPosition.y += sin(time * speed * particleSpeed + modelPosition.x * noise.x * 100.0) * 0.2;
   modelPosition.z += cos(time * speed * particleSpeed + modelPosition.x * noise.y * 100.0) * 0.2;
   modelPosition.x += cos(time * speed * particleSpeed + modelPosition.x * noise.z * 100.0) * 0.2;

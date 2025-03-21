@@ -23,8 +23,8 @@ export default class World {
     const planeGeometry = new THREE.PlaneGeometry(
       2 * this.sizes.aspect,
       2,
-      1000,
-      1000
+      1,
+      1
     );
     // 创建基础材质
     const planeMaterial = new THREE.MeshBasicMaterial({

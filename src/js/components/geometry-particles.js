@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js';
 
 import fragmentShader from '../../shaders/particles/fragment.glsl';
 import vertexShader from '../../shaders/particles/vertex.glsl';
@@ -39,77 +40,49 @@ export default class GeometryParticles {
   }
 
   setGeometry() {
-    // 确保有源几何体可用
     if (this.sourceMeshes.length === 0) {
       console.warn('没有提供源几何体进行采样');
       return;
     }
-
-    // 创建粒子几何体
+  
     this.geometry = new THREE.BufferGeometry();
-
-    // 位置数组
+  
     const positions = new Float32Array(this.parameters.count * 3);
-    // 噪声数组（用于动画）
     const noises = new Float32Array(this.parameters.count * 3);
-    // 随机速度数组
     const speeds = new Float32Array(this.parameters.count);
-    // 随机大小数组
     const sizes = new Float32Array(this.parameters.count);
-
-    // 从源几何体中采样点
+  
+    this.samplePoints(positions, noises, speeds, sizes);
+  
+    this.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    this.geometry.setAttribute('noise', new THREE.BufferAttribute(noises, 3));
+    this.geometry.setAttribute('particleSpeed', new THREE.BufferAttribute(speeds, 1));
+    this.geometry.setAttribute('particleSize', new THREE.BufferAttribute(sizes, 1));
+  }
+  
+  samplePoints(positions, noises, speeds, sizes) {
+    const tempPosition = new THREE.Vector3();
+  
     for (let index = 0; index < this.parameters.count; index++) {
-      // 随机选择一个源几何体
       const meshIndex = Math.floor(Math.random() * this.sourceMeshes.length);
       const mesh = this.sourceMeshes[meshIndex];
-
-      // 获取源几何体的顶点
-      const sourcePositions = mesh.geometry.attributes.position.array;
-      const vertexCount = sourcePositions.length / 3;
-
-      // 随机选择一个顶点
-      const randomVertexIndex = Math.floor(Math.random() * vertexCount);
-
-      // 获取顶点位置
-      const x = sourcePositions[randomVertexIndex * 3];
-      const y = sourcePositions[randomVertexIndex * 3 + 1];
-      const z = sourcePositions[randomVertexIndex * 3 + 2];
-
-      // 应用网格变换
-      const position = new THREE.Vector3(x, y, z);
-      position.applyMatrix4(mesh.matrixWorld);
-
-      // 设置位置
-      positions[index * 3] = position.x;
-      positions[index * 3 + 1] = position.y;
-      positions[index * 3 + 2] = position.z;
-
-      // 随机噪声值（从0.3, 0.6, 0.9中选择）
+      const sampler = new MeshSurfaceSampler(mesh).build();
+  
+      sampler.sample(tempPosition);
+      tempPosition.applyMatrix4(mesh.matrixWorld);
+  
+      positions[index * 3] = tempPosition.x;
+      positions[index * 3 + 1] = tempPosition.y;
+      positions[index * 3 + 2] = tempPosition.z;
+  
       const noiseValues = [0.3, 0.6, 0.9];
       noises[index * 3] = noiseValues[Math.floor(Math.random() * 3)];
       noises[index * 3 + 1] = noiseValues[Math.floor(Math.random() * 3)];
       noises[index * 3 + 2] = noiseValues[Math.floor(Math.random() * 3)];
-
-      // 随机速度值（0.5到1.5之间）
+  
       speeds[index] = 0.5 + Math.random();
-      // 随机大小值（0.3到1.0之间）
       sizes[index] = 0.3 + Math.random() * 0.7;
     }
-
-    // 设置几何体属性
-    this.geometry.setAttribute(
-      'position',
-      new THREE.BufferAttribute(positions, 3)
-    );
-    this.geometry.setAttribute('noise', new THREE.BufferAttribute(noises, 3));
-    this.geometry.setAttribute(
-      'particleSpeed',
-      new THREE.BufferAttribute(speeds, 1)
-    );
-    this.geometry.setAttribute(
-      'particleSize',
-      new THREE.BufferAttribute(sizes, 1)
-    );
   }
 
   setMaterial() {
@@ -145,6 +118,7 @@ export default class GeometryParticles {
     }
   }
 
+  //#region 
   setDebug() {
     const particlesFolder = this.debug.ui.addFolder({
       title: '粒子系统',
@@ -226,6 +200,7 @@ export default class GeometryParticles {
         this.setPoints();
       });
   }
+//#endregion
 
   update() {
     // 更新时间uniform
