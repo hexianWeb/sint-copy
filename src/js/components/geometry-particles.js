@@ -63,26 +63,41 @@ export default class GeometryParticles {
   samplePoints(positions, noises, speeds, sizes) {
     const tempPosition = new THREE.Vector3();
   
-    for (let index = 0; index < this.parameters.count; index++) {
-      const meshIndex = Math.floor(Math.random() * this.sourceMeshes.length);
-      const mesh = this.sourceMeshes[meshIndex];
-      const sampler = new MeshSurfaceSampler(mesh).build();
-  
-      sampler.sample(tempPosition);
-      tempPosition.applyMatrix4(mesh.matrixWorld);
-  
-      positions[index * 3] = tempPosition.x;
-      positions[index * 3 + 1] = tempPosition.y;
-      positions[index * 3 + 2] = tempPosition.z;
-  
-      const noiseValues = [0.3, 0.6, 0.9];
-      noises[index * 3] = noiseValues[Math.floor(Math.random() * 3)];
-      noises[index * 3 + 1] = noiseValues[Math.floor(Math.random() * 3)];
-      noises[index * 3 + 2] = noiseValues[Math.floor(Math.random() * 3)];
-  
-      speeds[index] = 0.5 + Math.random();
-      sizes[index] = 0.3 + Math.random() * 0.7;
-    }
+    // 为每个源网格创建一个采样器
+    const samplers = this.sourceMeshes.map(mesh => new MeshSurfaceSampler(mesh).build());
+    
+    // 计算每个网格应该采样的点数
+    const pointsPerMesh = Math.floor(this.parameters.count / this.sourceMeshes.length);
+    const remainingPoints = this.parameters.count % this.sourceMeshes.length;
+    
+    let currentIndex = 0;
+    
+    // 对每个网格进行采样
+    this.sourceMeshes.forEach((mesh, meshIndex) => {
+      const sampler = samplers[meshIndex];
+      // 计算当前网格需要采样的点数
+      const currentMeshPoints = pointsPerMesh + (meshIndex < remainingPoints ? 1 : 0);
+      
+      // 对当前网格进行采样
+      for (let i = 0; i < currentMeshPoints; i++) {
+        sampler.sample(tempPosition);
+        tempPosition.applyMatrix4(mesh.matrixWorld);
+        
+        positions[currentIndex * 3] = tempPosition.x;
+        positions[currentIndex * 3 + 1] = tempPosition.y;
+        positions[currentIndex * 3 + 2] = tempPosition.z;
+        
+        const noiseValues = [0.3, 0.6, 0.9];
+        noises[currentIndex * 3] = noiseValues[Math.floor(Math.random() * 3)];
+        noises[currentIndex * 3 + 1] = noiseValues[Math.floor(Math.random() * 3)];
+        noises[currentIndex * 3 + 2] = noiseValues[Math.floor(Math.random() * 3)];
+        
+        speeds[currentIndex] = 0.5 + Math.random();
+        sizes[currentIndex] = 0.3 + Math.random() * 0.7;
+        
+        currentIndex++;
+      }
+    });
   }
 
   setMaterial() {
@@ -107,7 +122,8 @@ export default class GeometryParticles {
         isOrthographic: { value: isOrthographic },
         sizeAttenuation: { value: this.parameters.sizeAttenuation }
       }
-    });
+    })
+    
   }
 
   setPoints() {

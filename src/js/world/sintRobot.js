@@ -76,16 +76,6 @@ export default class SintRobot {
     if (this.animation.mixer && this.isPlaying) {
       this.animation.mixer.update(this.animationSpeed * 0.005 * this.time.delta);
     }
-    if (this.maskMesh) {
-      this.maskMesh.material.envMapRotation = new THREE.Euler(
-        // 0 + this.time.elapsed * 0.003,
-        0,
-        // 0 + this.time.elapsed * 0.002,
-        0,
-        0
-      );
-      this.maskMesh.material.needsUpdate = true;
-    }
     this.updateCameraPosition();
   }
 

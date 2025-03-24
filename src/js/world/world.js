@@ -36,11 +36,11 @@ export default class World {
 
     // 克隆一个平面让其置于 -0.5 z
     const clonedPlane = this.plane.clone();
-    clonedPlane.position.set(0, 0, -0.5);
-    this.scene.add(clonedPlane);
-
     this.plane.position.set(0, 0, 0.5);
-
+    clonedPlane.position.set(0, 0, -0.5);
+    this.plane.updateMatrixWorld();
+    clonedPlane.updateMatrixWorld();
+    this.scene.add(clonedPlane);
     // 将平面添加到场景中
     this.scene.add(this.plane);
 
